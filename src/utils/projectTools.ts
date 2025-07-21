@@ -80,18 +80,18 @@ const setupProjectTools = () => {
           true,
         ),
       },
-      {
-        name: "Compile Project",
-        icon: "Rocket",
-        action: () => downloadScript(nodeSystem, entries),
-      },
       ...(isDesktop() ? [
         {
           name: "Run Project",
-          icon: "CirclePlay",
+          icon: "Rocket",
           action: () => runProject(generateScript(nodeSystem, entries)),
         }
       ] : []),
+      {
+        name: "Compile Project",
+        icon: "Package",
+        action: () => downloadScript(nodeSystem, entries),
+      },
     ];
   };
 
