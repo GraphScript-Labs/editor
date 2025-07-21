@@ -7,6 +7,7 @@ import { NodeSystemProvider } from "@utils/nodeSystem";
 import { NodeHistoryProvider } from "@utils/nodeHistory";
 import { NodeFactoryProvider } from "@utils/nodeFactory";
 import { AppDataProvider } from "@utils/appData";
+import { UnsavedChangesProvider } from "./unsavedChanges";
 
 type ProviderType = ({ children }: {
   children: ReactNode;
@@ -16,6 +17,7 @@ export function RootProvider({ children }: {
   children: ReactNode;
 }) {
   const providers: ProviderType[] = [
+    UnsavedChangesProvider,
     PromptProvider,
     PalleteProvider,
     VariablesProvider,

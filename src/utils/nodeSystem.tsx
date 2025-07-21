@@ -11,6 +11,8 @@ import type {
   NodeSystem,
 } from "@defs/Node";
 
+import { useUnsavedChangesContext } from "@utils/unsavedChanges";
+
 const createNodeSystemContext = () => {
   const NodeSystemContext = createContext<{
     nodeSystem: NodeSystem;
@@ -28,6 +30,10 @@ const createNodeSystemContext = () => {
   const NodeSystemProvider = ({ children }: {
     children: ReactNode;
   }) => {
+    const {
+      setUnsavedChanges,
+    } = useUnsavedChangesContext()!;
+
     const [entries, setEntries] = useState<string[]>([
       "ENTRY",
     ]);
@@ -54,6 +60,7 @@ const createNodeSystemContext = () => {
           isEntry: true,
         }
 
+        setUnsavedChanges(true);
         return { ...prev };
       });
 
@@ -61,7 +68,7 @@ const createNodeSystemContext = () => {
         if (prev.includes(entryName)) return prev;
         return [...prev, entryName];
       });
-    }, []);
+    }, [setUnsavedChanges]);
 
     const addNode = useCallback((
       baseId: string,
@@ -80,10 +87,11 @@ const createNodeSystemContext = () => {
           };
         }
 
+        setUnsavedChanges(true);
         prev[baseId].nodes.push(node);
         return { ...prev };
       });
-    }, []);
+    }, [setUnsavedChanges]);
 
     const removeNode = useCallback((nodeId: string) => {
       setNodeSystem(prev => {
@@ -94,17 +102,19 @@ const createNodeSystemContext = () => {
           n => n.id !== nodeId
         );
 
+        setUnsavedChanges(true);
         return { ...prev };
       });
-    }, []);
+    }, [setUnsavedChanges]);
 
     const overrideNodeSystem = useCallback((
       system: NodeSystem,
       entries: string[],
     ) => {
+      setUnsavedChanges(true);
       setNodeSystem(system);
       setEntries(entries);
-    }, []);
+    }, [setUnsavedChanges]);
 
     const exposed = {
       nodeSystem,

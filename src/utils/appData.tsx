@@ -17,8 +17,9 @@ import { usePalleteContext } from "@utils/pallete";
 import { useVariablesContext } from "@utils/variables";
 import { loadProject, saveProject } from "@utils/engineTools";
 import { packProject } from "@utils/packerTools";
-import { backupProject, getRestoredProject } from "@utils/desktopTools";
+import { backupProject, getRestoredProject, isDesktop } from "@utils/desktopTools";
 import { saveData } from "@utils/persistentTools";
+import { useUnsavedChangesContext } from "@utils/unsavedChanges";
 import {
   getBreadcrumb,
   getWindowTools,
@@ -78,6 +79,11 @@ const createAppDataContext = () => {
       requestPrompt,
     } = usePromptContext()!;
 
+    const {
+      unsavedChanges,
+      setUnsavedChanges,
+    } = useUnsavedChangesContext()!;
+
     const [
       windowTools,
       setWindowTools,
@@ -97,6 +103,8 @@ const createAppDataContext = () => {
       projectId,
       setProjectId,
     ] = useState<string | null>(null);
+
+    const [loaded, setLoaded] = useState<boolean>(false);
     
     useEffect(() => {
       setWindowTools(
@@ -157,24 +165,31 @@ const createAppDataContext = () => {
 
     useEffect(() => {
       (async () => {
-        const existingId = await loadExistingId();
-        const restoredProject = await getRestoredProject();
-        saveData(`p:${existingId}`, restoredProject);
-        setProjectId(existingId);
+        if (loaded) return;
 
-        loadProject(
+        const existingId = await loadExistingId();
+        setProjectId(existingId);
+        if (isDesktop()) {
+          const restoredProject = await getRestoredProject();
+          saveData(`p:${existingId}`, restoredProject);
+        }
+
+        await loadProject(
           existingId,
           overrideNodeSystem,
           overrideVariables,
           openNode,
           removeNode,
         );
+
+        setLoaded(true);
       })();
     }, [
       openNode,
       overrideNodeSystem,
       overrideVariables,
       removeNode,
+      loaded,
     ]);
 
     useEffect(() => {
@@ -198,6 +213,21 @@ const createAppDataContext = () => {
     ]);
 
     useEffect(() => {
+      if (!loaded) return;
+      if (!projectId) return;
+      if (!unsavedChanges) return;
+
+      const project = packProject(
+        projectId!,
+        nodeSystem,
+        entries,
+        {
+          states: statesList,
+          customComponents,
+        }
+      );
+
+      backupProject(JSON.stringify(project, null, 2));
       saveProject(
         projectId!,
         nodeSystem,
@@ -207,33 +237,12 @@ const createAppDataContext = () => {
           customComponents,
         },
       );
+
+      setUnsavedChanges(false);
     }, [
-      projectId,
-      entries,
-      nodeSystem,
-      statesList,
-      customComponents,
-    ]);
-
-    useEffect(() => {
-      const backupInterval = setInterval(() => {
-        const project = packProject(
-          projectId!,
-          nodeSystem,
-          entries,
-          {
-            states: statesList,
-            customComponents,
-          }
-        );
-
-        backupProject(JSON.stringify(project, null, 2));
-      }, 5000);
-
-      return () => {
-        clearInterval(backupInterval);
-      }
-    }, [
+      loaded,
+      unsavedChanges,
+      setUnsavedChanges,
       customComponents,
       entries,
       nodeSystem,

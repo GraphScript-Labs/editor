@@ -23,13 +23,6 @@
     <meta name="twitter:image" content="https://github.com/GraphScript-Labs/.github/blob/main/Banner.png?raw=true">
 
     <script src="/pwv.js"></script>
-
-    <script defer>
-      if (!window.hasPWV) {
-        const element = document.querySelector(".pywebview-drag-region");
-        element.remove();
-      }
-    </script>
     
     <script>
       document.addEventListener("contextmenu", (event) => {
@@ -55,5 +48,11 @@
     <span class="pywebview-drag-region"></span>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if (!window.hasPWV) {
+        const element = document.querySelector(".pywebview-drag-region");
+        element.remove();
+      }
+    </script>
   </body>
 </html>

@@ -5,6 +5,8 @@ import {
 
 import type { NodeModel } from "@defs/Node";
 
+import { useUnsavedChangesContext } from "@utils/unsavedChanges";
+
 import { DynamicIcon } from "@components/commons/DynamicIcon";
 import { Glass } from "@components/commons/Glass";
 import { Input } from "@components/commons/Input";
@@ -16,6 +18,9 @@ export function Node({
 }: {
   node: NodeModel;
 }) {
+  const {
+    setUnsavedChanges,
+  } = useUnsavedChangesContext()!;
   const [active, setActive] = useState(false);
 
   const handleClick: () => void = useCallback(() => {
@@ -71,6 +76,7 @@ export function Node({
                 defaultValue={node.value || ""}
                 onChange={(event) => {
                   node.value = event.target.value;
+                  setUnsavedChanges(true);
                 }}
               />
             </div>
