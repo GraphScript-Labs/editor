@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import type { Suggestion } from "@defs/UI";
 
@@ -16,6 +16,11 @@ export function Palette({
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
 
+  const handleBlur = useCallback(() => {
+    setActive(false);
+    setQuery("");
+  }, []);
+
   useEffect(() => {
     setSuggestions(generateSuggestions(query) || []);
   }, [generateSuggestions, query]);
@@ -24,7 +29,7 @@ export function Palette({
     <div
       className="app-navigator"
       onFocus={() => setActive(true)}
-      onBlur={() => setActive(false)}
+      onBlur={handleBlur}
     >
       <Input
         value={query}
