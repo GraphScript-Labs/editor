@@ -9,6 +9,7 @@
   justify-content: center;
   border-radius: calc(var(--icon-size) / 2);
   cursor: pointer;
+  pointer-events: all;
 }
 
 .node.active,

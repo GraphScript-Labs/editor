@@ -8,27 +8,31 @@
   height: 2.5rem;
 }
 
-.root-app-bar-title {
+.root-app-bar-logo {
   font-weight: bold;
-  background-color: var(--color-white);
-  color: var(--color-black);
-  padding: 0.25rem 1rem;
-  border-radius: 0.25rem;
-  text-wrap: nowrap;
+  height: 100%;
+  padding: 0.5rem;
 }
 
-.root-app-bar-title:not(.is-desktop) {
+.root-app-bar-logo img {
+  height: 100%;
+  width: auto;
+  pointer-events: none;
+}
+
+.root-app-bar-logo:not(.is-desktop) {
   margin-left: 0.25rem;
+  filter: brightness(3);
 }
 
-.root-app-extra-title {
+.root-app-breadcrumb {
   display: flex;
   align-items: center;
   justify-content: end;
   padding: 0 1rem;
 }
 
-.root-app-extra-title span {
+.root-app-breadcrumb span {
   background: var(--color-black);
   color: var(--color-white);
   padding: 0.25rem 1rem;

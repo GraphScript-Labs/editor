@@ -6,6 +6,7 @@ import { WindowActions } from "@components/window/WindowActions";
 import { ToolBar  } from "@components/window/ToolBar";
 import { Palette  } from "@components/window/Palette";
 
+import Logo from "@assets/GraphScript.png";
 import "./style.css";
 
 export function AppBar({
@@ -17,25 +18,23 @@ export function AppBar({
   breadcrumb?: string;
   generateSuggestions?: (query: string) => Suggestion[];
 }) {
-  const title: string = "GraphScript Engine";
-  
   return (<>
     <div className="root-app-bar">
       {isDesktop() && <WindowActions />}
       <div
         className={[
-          "root-app-bar-title",
+          "root-app-bar-logo",
           isDesktop() ? "is-desktop" : "",
         ].join(" ")}
       >
-        {title}
+        <img src={Logo} alt="GraphScript Engine" />
       </div>
       
       <ToolBar tools={tools} />
 
       <Palette generateSuggestions={generateSuggestions} />
 
-      <div className="root-app-extra-title">
+      <div className="root-app-breadcrumb">
         <span>
           {breadcrumb}
         </span>

@@ -12,6 +12,7 @@
   align-items: center;
   cursor: pointer;
   position: relative;
+  pointer-events: all;
 }
 
 .root-tool.disabled {

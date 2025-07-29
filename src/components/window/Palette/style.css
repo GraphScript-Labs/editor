@@ -1,6 +1,7 @@
 .app-navigator {
   flex: 1;
   position: relative;
+  pointer-events: all;
 }
 
 .app-navigator input {
