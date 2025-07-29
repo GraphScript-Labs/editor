@@ -3,6 +3,7 @@ export type ToolButtonData = {
   icon: string;
   action: () => void;
   disabled?: boolean;
+  environment?: "desktop" | "web" | "all";
 };
 
 export type Suggestion = {

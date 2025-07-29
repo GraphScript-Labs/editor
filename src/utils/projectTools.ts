@@ -1,7 +1,7 @@
 import type { RefObject } from "react";
 
 import type { NodeSystem, Variable } from "@defs/Node";
-import type { Suggestion } from "@defs/UI";
+import type { Suggestion, ToolButtonData } from "@defs/UI";
 
 import { isDesktop, loadProjectId, runProject } from "@utils/desktopTools";
 import { loadData, wipeData } from "@utils/persistentTools";
@@ -42,7 +42,15 @@ const setupProjectTools = () => {
     statesList: Variable[],
     customComponents: Variable[],
   ) => {
-    return [
+    const tools: ToolButtonData[] = [];
+    const addTool = (tool: ToolButtonData) => {
+      const { environment } = tool;
+      if (environment == "desktop" && !isDesktop()) return;
+      if (environment == "web" && isDesktop()) return;
+      tools.push(tool);
+    };
+
+    const presets: ToolButtonData[] = [
       {
         name: "Refresh",
         icon: "RefreshCw",
@@ -55,6 +63,7 @@ const setupProjectTools = () => {
         disabled: isEntry(activeNode)
       },
       {
+        environment: "web",
         name: "Load Project",
         icon: "HardDriveUpload",
         action: () => loadProject(
@@ -67,6 +76,7 @@ const setupProjectTools = () => {
         ),
       },
       {
+        environment: "web",
         name: "Save Project",
         icon: "HardDriveDownload",
         action: () => saveProject(
@@ -80,19 +90,21 @@ const setupProjectTools = () => {
           true,
         ),
       },
-      ...(isDesktop() ? [
-        {
-          name: "Run Project",
-          icon: "Rocket",
-          action: () => runProject(generateScript(nodeSystem, entries)),
-        }
-      ] : []),
+      {
+        environment: "desktop",
+        name: "Run Project",
+        icon: "Rocket",
+        action: () => runProject(generateScript(nodeSystem, entries)),
+      },
       {
         name: "Compile Project",
         icon: "Package",
         action: () => downloadScript(nodeSystem, entries),
       },
     ];
+
+    presets.forEach(addTool);
+    return tools;
   };
 
   const updatePaletteRegistry = (

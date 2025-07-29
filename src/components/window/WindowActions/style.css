@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  pointer-events: all;
 }
 
 .root-window-actions-button:hover::after {
