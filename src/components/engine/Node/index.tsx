@@ -15,25 +15,35 @@ import "./style.css";
 
 export function Node({
   node,
+  forcedActive = false,
 }: {
   node: NodeModel;
+  forcedActive?: boolean;
 }) {
   const {
     setUnsavedChanges,
   } = useUnsavedChangesContext()!;
+
   const [active, setActive] = useState(false);
+  const [baseType, setBaseType] = useState<string>(node.baseType || "text");
 
   const handleClick: () => void = useCallback(() => {
     if (node.action) node.action();
     else setActive(prev => !prev);
   }, [node]);
 
+  const switchBaseType = useCallback((type: string) => {
+    node.baseType = type;
+    setBaseType(type);
+    setUnsavedChanges(true);
+  }, [setUnsavedChanges, node]);
+
   return (<>
     <div className="node-wrapper">
       <Glass
         className={[
           "node",
-          active ? "active" : "",
+          (active || forcedActive) ? "active" : "",
         ].join(" ")}
         style={{ color: node.color }}
         onClick={handleClick}
@@ -69,7 +79,37 @@ export function Node({
             />))
           }
 
-          {node.isBase && (
+          {node.isBase && (<>
+            <Node
+              forcedActive={baseType === "text"}
+              node={{
+                color: "#000",
+                icon: "Type",
+                name: "Text Type",
+                action: () => switchBaseType("text"),
+              }}
+            />
+
+            <Node
+              forcedActive={baseType === "numeric"}
+              node={{
+                color: "#000",
+                icon: "Hash",
+                name: "Numeric Type",
+                action: () => switchBaseType("numeric"),
+              }}
+            />
+
+            <Node
+              forcedActive={baseType === "boolean"}
+              node={{
+                color: "#000",
+                icon: "ToggleRight",
+                name: "Boolean Type",
+                action: () => switchBaseType("boolean"),
+              }}
+            />
+
             <div className="node-base-input">
               <Input
                 placeholder="Base Node Value"
@@ -80,7 +120,7 @@ export function Node({
                 }}
               />
             </div>
-          )}
+          </>)}
         </Glass>
       )}
     </div>

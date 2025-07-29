@@ -1,9 +1,10 @@
 import { saveFile } from '@utils/desktopTools';
 
-import type {
-  NodeModel,
-  NodeGroup,
-  NodeSystem,
+import {
+  type NodeModel,
+  type NodeGroup,
+  type NodeSystem,
+  BasePrefixes,
 } from "@defs/Node";
 
 const setupCompilerTools = () => {
@@ -23,7 +24,8 @@ const setupCompilerTools = () => {
       const indents: string = " ".repeat(level);
       for (const node of nodes) {
         if (node.isBase) {
-          script += `${indents}:${node.value || ""}\n`;
+          const basePrefix = BasePrefixes[node.baseType || "text"];
+          script += `${indents}${basePrefix}${node.value || ""}\n`;
           continue;
         }
         

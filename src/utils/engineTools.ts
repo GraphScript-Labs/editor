@@ -121,6 +121,7 @@ const setupEngineTools = () => {
         icon: packedNode.icon,
         hasNext: packedNode.hasNext,
         value: packedNode.value,
+        baseType: packedNode.baseType,
         isBase: packedNode.isBase,
         isTopLevel: packedNode.isTopLevel,
         context: [

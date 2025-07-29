@@ -34,8 +34,9 @@ const setupPackerTools = () => {
         icon: node.icon,
         hasNext: node.hasNext,
         value: node.value,
+        baseType: node.baseType,
         isBase: node.isBase,
-        isTopLevel: node.isTopLevel
+        isTopLevel: node.isTopLevel,
       };
 
       savedNodes[node.id!] = packedNode;

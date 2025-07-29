@@ -8,6 +8,7 @@ export interface PackedNode {
   icon: string;
   hasNext?: boolean;
   value?: string;
+  baseType?: string;
   isBase?: boolean;
   isTopLevel?: boolean;
 };

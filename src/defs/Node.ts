@@ -8,6 +8,7 @@ export interface NodeModel {
   action?: () => void;
   context?: NodeModel[];
   value?: string;
+  baseType?: string;
   isBase?: boolean;
   isTopLevel?: boolean;
 }
@@ -20,10 +21,15 @@ export type NodeGroup = {
 
 export interface NodeSystem {
   [baseId: string]: NodeGroup;
-}
+};
 
 export interface Variable {
   name: string;
   color: string;
-}
+};
 
+export const BasePrefixes: { [key: string]: string } = {
+  text: ":",
+  numeric: "",
+  boolean: "",
+};
