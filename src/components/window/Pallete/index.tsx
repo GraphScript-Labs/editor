@@ -28,6 +28,7 @@ export function Pallete({
     >
       <Input
         value={query}
+        placeholder="App Pallete"
         onChange={(e) => setQuery(e.target.value)}
       />
 
