@@ -7,7 +7,7 @@ import { NodeSystemProvider } from "@utils/nodeSystem";
 import { NodeHistoryProvider } from "@utils/nodeHistory";
 import { NodeFactoryProvider } from "@utils/nodeFactory";
 import { AppDataProvider } from "@utils/appData";
-import { UnsavedChangesProvider } from "./unsavedChanges";
+import { UnsavedChangesProvider } from "@utils/unsavedChanges";
 
 type ProviderType = ({ children }: {
   children: ReactNode;

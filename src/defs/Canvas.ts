@@ -1,4 +1,4 @@
-import type { NodeModel } from "./Node";
+import type { NodeModel } from "@defs/Node";
 
 export interface CanvasModel {
   nodes: NodeModel[];
