@@ -13,7 +13,7 @@ import { useNodeFactoryContext } from "@utils/nodeFactory";
 import { useNodeSystemContext } from "@utils/nodeSystem";
 import { useNodeHistoryContext } from "@utils/nodeHistory";
 import { usePromptContext } from "@utils/prompt";
-import { usePalleteContext } from "@utils/pallete";
+import { usePaletteContext } from "@utils/palette";
 import { useVariablesContext } from "@utils/variables";
 import { loadProject, saveProject } from "@utils/engineTools";
 import { packProject } from "@utils/packerTools";
@@ -24,7 +24,7 @@ import {
   getBreadcrumb,
   getWindowTools,
   loadExistingId,
-  updatePalleteRegistry,
+  updatePaletteRegistry,
 } from "@utils/projectTools";
 
 const createAppDataContext = () => {
@@ -69,7 +69,7 @@ const createAppDataContext = () => {
     const {
       addSuggestion,
       generateSuggestions,
-    } = usePalleteContext()!;
+    } = usePaletteContext()!;
 
     const {
       newNode,
@@ -193,7 +193,7 @@ const createAppDataContext = () => {
     ]);
 
     useEffect(() => {
-      updatePalleteRegistry(
+      updatePaletteRegistry(
         addSuggestion,
         openNode,
         entries,

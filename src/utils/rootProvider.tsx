@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from "react";
 
 import { PromptProvider } from "@utils/prompt";
-import { PalleteProvider } from "@utils/pallete";
+import { PaletteProvider } from "@utils/palette";
 import { VariablesProvider } from "@utils/variables";
 import { NodeSystemProvider } from "@utils/nodeSystem";
 import { NodeHistoryProvider } from "@utils/nodeHistory";
@@ -19,7 +19,7 @@ export function RootProvider({ children }: {
   const providers: ProviderType[] = [
     UnsavedChangesProvider,
     PromptProvider,
-    PalleteProvider,
+    PaletteProvider,
     VariablesProvider,
     NodeSystemProvider,
     NodeHistoryProvider,

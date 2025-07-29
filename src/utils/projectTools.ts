@@ -95,7 +95,7 @@ const setupProjectTools = () => {
     ];
   };
 
-  const updatePalleteRegistry = (
+  const updatePaletteRegistry = (
     addSuggestion: (suggestion: Suggestion, group: string) => void,
     openNode: (nodeId: string, topLevel?: boolean) => void,
     entries: string[],
@@ -171,7 +171,7 @@ const setupProjectTools = () => {
     getWindowTools,
     getBreadcrumb,
     loadExistingId,
-    updatePalleteRegistry,
+    updatePaletteRegistry,
   };
 }
 
@@ -179,6 +179,6 @@ export const {
   getWindowTools,
   getBreadcrumb,
   loadExistingId,
-  updatePalleteRegistry,
+  updatePaletteRegistry,
 } = setupProjectTools();
 

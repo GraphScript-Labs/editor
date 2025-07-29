@@ -7,7 +7,7 @@ import { DynamicIcon } from "@components/commons/DynamicIcon";
 
 import "./style.css";
 
-export function Pallete({
+export function Palette({
   generateSuggestions,
 }: {
   generateSuggestions: (query: string) => Suggestion[];
@@ -28,7 +28,7 @@ export function Pallete({
     >
       <Input
         value={query}
-        placeholder="App Pallete"
+        placeholder="App Palette"
         onChange={(e) => setQuery(e.target.value)}
       />
 

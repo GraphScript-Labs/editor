@@ -8,13 +8,13 @@ import {
 
 import type { Suggestion } from "@defs/UI";
 
-function createPalleteContext() {
-  const PalleteContext = createContext<{
+function createPaletteContext() {
+  const PaletteContext = createContext<{
     addSuggestion: (suggestion: Suggestion, group: string) => void;
     generateSuggestions: (query: string) => Suggestion[];
   } | undefined>(undefined);
 
-  const PalleteProvider = ({ children }: {
+  const PaletteProvider = ({ children }: {
     children: ReactNode;
   }) => {
     const [ keys, setKeys ] = useState<{
@@ -88,24 +88,24 @@ function createPalleteContext() {
     };
 
     return (<>
-      <PalleteContext.Provider value={exposed}>
+      <PaletteContext.Provider value={exposed}>
         {children}
-      </PalleteContext.Provider>
+      </PaletteContext.Provider>
     </>);
   }
 
-  const usePalleteContext = () => {
-    return useContext(PalleteContext);
+  const usePaletteContext = () => {
+    return useContext(PaletteContext);
   }
 
   return {
-    PalleteProvider,
-    usePalleteContext
+    PaletteProvider,
+    usePaletteContext
   }
 }
 
 export const {
-  PalleteProvider,
-  usePalleteContext
-} = createPalleteContext();
+  PaletteProvider,
+  usePaletteContext
+} = createPaletteContext();
 

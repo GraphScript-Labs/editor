@@ -4,7 +4,7 @@ import { isDesktop } from "@utils/desktopTools";
 
 import { WindowActions } from "@components/window/WindowActions";
 import { ToolBar  } from "@components/window/ToolBar";
-import { Pallete  } from "@components/window/Pallete";
+import { Palette  } from "@components/window/Palette";
 
 import "./style.css";
 
@@ -33,7 +33,7 @@ export function AppBar({
       
       <ToolBar tools={tools} />
 
-      <Pallete generateSuggestions={generateSuggestions} />
+      <Palette generateSuggestions={generateSuggestions} />
 
       <div className="root-app-extra-title">
         <span>
