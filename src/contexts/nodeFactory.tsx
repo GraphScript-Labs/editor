@@ -3,10 +3,11 @@ import { createContext, useContext, type ReactNode } from "react";
 import type { NodeModel } from "@defs/Node";
 
 import { generateId } from "@utils/generatorTools";
-import { useNodeSystemContext } from "@utils/nodeSystem";
-import { useNodeHistoryContext } from "@utils/nodeHistory";
 import { componentLib } from "@utils/componentLib";
-import { useVariablesContext } from "@utils/variables";
+
+import { useNodeSystemContext } from "@contexts/nodeSystem";
+import { useNodeHistoryContext } from "@contexts/nodeHistory";
+import { useVariablesContext } from "@contexts/variables";
 
 const createNodeFactoryContext = () => {
   const NodeFactoryContext = createContext<{

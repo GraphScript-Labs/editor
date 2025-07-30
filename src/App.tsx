@@ -1,4 +1,4 @@
-import { useAppDataContext } from "@utils/appData";
+import { useAppDataContext } from "@contexts/appData";
 
 import { AppWindow } from "@components/window/AppWindow";
 import { Canvas } from "@components/engine/Canvas";

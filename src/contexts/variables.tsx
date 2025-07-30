@@ -1,9 +1,16 @@
-import { createContext, useCallback, useContext, useState, type ReactNode } from "react"
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  type ReactNode,
+} from "react"
 
 import type { Variable } from "@defs/Node";
 
 import { randomHexColor } from "@utils/generatorTools";
-import { usePromptContext } from "@utils/prompt";
+
+import { usePromptContext } from "@contexts/prompt";
 
 const createVariablesContext = () => {
   const VariablesContext = createContext<{

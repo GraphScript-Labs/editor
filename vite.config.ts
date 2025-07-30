@@ -20,6 +20,7 @@ export default defineConfig({
       '@components': path.resolve(__dirname, 'src/components'),
       '@defs': path.resolve(__dirname, 'src/defs'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@contexts': path.resolve(__dirname, 'src/contexts'),
       '@styles': path.resolve(__dirname, 'src/styles'),
     },
   },

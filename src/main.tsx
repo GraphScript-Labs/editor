@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { RootProvider } from '@utils/rootProvider.tsx'
+import { RootProvider } from '@contexts/rootProvider.tsx'
 
 import App from './App.tsx'
 

@@ -9,23 +9,30 @@ import {
 import type { Suggestion, ToolButtonData } from "@defs/UI";
 import type { NodeModel } from "@defs/Node";
 
-import { useNodeFactoryContext } from "@utils/nodeFactory";
-import { useNodeSystemContext } from "@utils/nodeSystem";
-import { useNodeHistoryContext } from "@utils/nodeHistory";
-import { usePromptContext } from "@utils/prompt";
-import { usePaletteContext } from "@utils/palette";
-import { useVariablesContext } from "@utils/variables";
 import { loadProject, saveProject } from "@utils/engineTools";
 import { packProject } from "@utils/packerTools";
-import { backupProject, getRestoredProject, isDesktop } from "@utils/desktopTools";
 import { saveData } from "@utils/persistentTools";
-import { useUnsavedChangesContext } from "@utils/unsavedChanges";
+
+import {
+  backupProject,
+  getRestoredProject,
+  isDesktop,
+} from "@utils/desktopTools";
+
 import {
   getBreadcrumb,
   getWindowTools,
   loadExistingId,
   updatePaletteRegistry,
 } from "@utils/projectTools";
+
+import { useNodeFactoryContext } from "@contexts/nodeFactory";
+import { useNodeSystemContext } from "@contexts/nodeSystem";
+import { useNodeHistoryContext } from "@contexts/nodeHistory";
+import { usePromptContext } from "@contexts/prompt";
+import { usePaletteContext } from "@contexts/palette";
+import { useVariablesContext } from "@contexts/variables";
+import { useUnsavedChangesContext } from "@contexts/unsavedChanges";
 
 const createAppDataContext = () => {
   const AppDataContext = createContext<{

@@ -1,13 +1,13 @@
 import type { JSX, ReactNode } from "react";
 
-import { PromptProvider } from "@utils/prompt";
-import { PaletteProvider } from "@utils/palette";
-import { VariablesProvider } from "@utils/variables";
-import { NodeSystemProvider } from "@utils/nodeSystem";
-import { NodeHistoryProvider } from "@utils/nodeHistory";
-import { NodeFactoryProvider } from "@utils/nodeFactory";
-import { AppDataProvider } from "@utils/appData";
-import { UnsavedChangesProvider } from "@utils/unsavedChanges";
+import { PromptProvider } from "@contexts/prompt";
+import { PaletteProvider } from "@contexts/palette";
+import { VariablesProvider } from "@contexts/variables";
+import { NodeSystemProvider } from "@contexts/nodeSystem";
+import { NodeHistoryProvider } from "@contexts/nodeHistory";
+import { NodeFactoryProvider } from "@contexts/nodeFactory";
+import { AppDataProvider } from "@contexts/appData";
+import { UnsavedChangesProvider } from "@contexts/unsavedChanges";
 
 type ProviderType = ({ children }: {
   children: ReactNode;

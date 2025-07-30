@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 
-import { usePromptContext } from "@utils/prompt";
+import { usePromptContext } from "@contexts/prompt";
 
 import { DynamicIcon } from "@components/commons/DynamicIcon";
 import { Input } from "@components/commons/Input";
