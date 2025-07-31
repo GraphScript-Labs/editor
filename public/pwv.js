@@ -9,5 +9,6 @@
 //     backup_project: (async () => {}),
 //     restore_project: (async () => ""),
 //     run_project: (async () => {}),
+//     log: (async () => {}),
 //   }
 // }

@@ -176,9 +176,12 @@ const createAppDataContext = () => {
 
         const existingId = await loadExistingId();
         setProjectId(existingId);
+
         if (isDesktop()) {
           const restoredProject = await getRestoredProject();
-          saveData(`p:${existingId}`, restoredProject);
+          if (restoredProject) {
+            saveData(`p:${existingId}`, restoredProject);
+          }
         }
 
         await loadProject(
