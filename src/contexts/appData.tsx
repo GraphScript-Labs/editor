@@ -7,7 +7,6 @@ import {
 } from "react";
 
 import type { Suggestion, ToolButtonData } from "@defs/UI";
-import type { NodeModel } from "@defs/Node";
 
 import { loadProject, saveProject } from "@utils/engineTools";
 import { packProject } from "@utils/packerTools";
@@ -26,7 +25,6 @@ import {
   updatePaletteRegistry,
 } from "@utils/projectTools";
 
-import { useNodeFactoryContext } from "@contexts/nodeFactory";
 import { useNodeSystemContext } from "@contexts/nodeSystem";
 import { useNodeHistoryContext } from "@contexts/nodeHistory";
 import { usePromptContext } from "@contexts/prompt";
@@ -41,7 +39,7 @@ const createAppDataContext = () => {
     generateSuggestions: (query: string) => Suggestion[];
     windowTools: ToolButtonData[];
     breadcrumb: string;
-    nodes: NodeModel[];
+    baseId: string;
   } | undefined>(undefined);
   
   const AppDataProvider = ({
@@ -79,10 +77,6 @@ const createAppDataContext = () => {
     } = usePaletteContext()!;
 
     const {
-      newNode,
-    } = useNodeFactoryContext()!;
-
-    const {
       requestPrompt,
     } = usePromptContext()!;
 
@@ -100,11 +94,6 @@ const createAppDataContext = () => {
       breadcrumb,
       setBreadcrumb,
     ] = useState<string>("");
-
-    const [
-      nodes,
-      setNodes,
-    ] = useState<NodeModel[]>([newNode]);
     
     const [
       projectId,
@@ -157,17 +146,6 @@ const createAppDataContext = () => {
       projectId,
       nodeHistory,
       activeNode,
-    ]);
-
-    useEffect(() => {
-      setNodes([
-        ...nodeSystem[activeNode]?.nodes || [],
-        newNode
-      ]);
-    }, [
-      activeNode,
-      newNode,
-      nodeSystem,
     ]);
 
     useEffect(() => {
@@ -266,7 +244,7 @@ const createAppDataContext = () => {
       generateSuggestions,
       windowTools,
       breadcrumb,
-      nodes,
+      baseId: activeNode,
     };
 
     return (<>

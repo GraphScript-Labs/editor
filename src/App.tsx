@@ -9,7 +9,7 @@ export default function App() {
     windowTools,
     breadcrumb,
     generateSuggestions,
-    nodes,
+    baseId,
   } = useAppDataContext()!;
 
   return (<>
@@ -18,7 +18,7 @@ export default function App() {
       breadcrumb={breadcrumb}
       generateSuggestions={generateSuggestions}
     >
-      <Canvas nodes={nodes} />
+      <Canvas baseId={baseId} />
       <Prompt />
     </AppWindow>
   </>);

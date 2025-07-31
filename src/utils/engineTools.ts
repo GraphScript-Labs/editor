@@ -125,13 +125,13 @@ const setupEngineTools = () => {
         isBase: packedNode.isBase,
         isTopLevel: packedNode.isTopLevel,
         context: [
-          {
+          ...(packedNode.isBase ? [] : [{
             id: `${packedNode.id}`,
             name: "Arguments",
             icon: "Import",
             color: "black",
             action: () => openNode(packedNode.id),
-          },
+          }]),
           {
             id: `${packedNode.id}:REMOVE`,
             name: "Remove",

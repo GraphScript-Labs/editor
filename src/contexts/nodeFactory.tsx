@@ -12,7 +12,7 @@ import { useVariablesContext } from "@contexts/variables";
 const createNodeFactoryContext = () => {
   const NodeFactoryContext = createContext<{
     nodeTemplate: (baseId: string, node: NodeModel) => NodeModel;
-    newNode: NodeModel;
+    newNode: (baseId: string) => NodeModel;
   } | undefined>(undefined);
 
   const NodeFactoryProvider = ({ children }: {
@@ -24,7 +24,6 @@ const createNodeFactoryContext = () => {
     } = useNodeSystemContext()!;
     
     const {
-      activeNode,
       openNode,
     } = useNodeHistoryContext()!;
 
@@ -54,13 +53,13 @@ const createNodeFactoryContext = () => {
             id: nodeId,
             hasNext: true,
             context: [
-              {
+              ...(node.isBase ? [] : [{
                 id: `${nodeId}`,
                 name: "Arguments",
                 icon: "Import",
                 color: "black",
                 action: () => openNode(nodeId),
-              },
+              }]),
               {
                 id: `${nodeId}:REMOVE`,
                 name: "Remove",
@@ -74,13 +73,13 @@ const createNodeFactoryContext = () => {
       };
     }
 
-    const newNode: NodeModel = {
-      id: "ENTRY",
+    const newNode: (baseId: string) => NodeModel = (baseId) => ({
+      id: `${baseId}:NEW`,
       name: "New Node",
       icon: "Plus",
       color: "black",
       context: [
-        nodeTemplate(activeNode, {
+        nodeTemplate(baseId, {
           name: "Base Node",
           code: "base",
           icon: "Atom",
@@ -93,7 +92,7 @@ const createNodeFactoryContext = () => {
           icon: "Shapes",
           color: "black",
           context: componentLib.map(component => nodeTemplate(
-            activeNode,
+            baseId,
             component,
           )),
         },
@@ -110,7 +109,7 @@ const createNodeFactoryContext = () => {
               action: promptComponent,
             },
             ...customComponents.map(component => nodeTemplate(
-              activeNode,
+              baseId,
               {
                 name: component.name,
                 code: component.name,
@@ -133,7 +132,7 @@ const createNodeFactoryContext = () => {
               action: promptState,
             },
             ...statesList.map(state => nodeTemplate(
-              activeNode,
+              baseId,
               {
                 name: state.name,
                 code: state.name,
@@ -144,7 +143,7 @@ const createNodeFactoryContext = () => {
           ],
         },
       ]
-    };
+    });
 
     const exposed = {
       nodeTemplate,

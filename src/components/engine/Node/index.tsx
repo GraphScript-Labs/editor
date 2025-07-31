@@ -11,13 +11,17 @@ import { DynamicIcon } from "@components/commons/DynamicIcon";
 import { Glass } from "@components/commons/Glass";
 import { Input } from "@components/commons/Input";
 
+import { Canvas } from "@components/engine/Canvas";
+
 import "./style.css";
 
 export function Node({
   node,
+  showCanvas = false,
   forcedActive = false,
 }: {
   node: NodeModel;
+  showCanvas?: boolean;
   forcedActive?: boolean;
 }) {
   const {
@@ -65,7 +69,7 @@ export function Node({
         )}
       </Glass>
       
-      {node.context && (
+      {(node.context?.length !== 0) && node.context && (
         <Glass
           className={[
             "node-context",
@@ -77,6 +81,17 @@ export function Node({
               key={contextNode.name}
               node={contextNode}
             />))
+          }
+
+          {
+            (!node.isBase && showCanvas) && (<>
+              <Glass className="context-canvas">
+                <Canvas
+                  baseId={node.id!}
+                  contextCanvas={true}
+                />
+              </Glass>
+            </>)
           }
 
           {node.isBase && (<>
