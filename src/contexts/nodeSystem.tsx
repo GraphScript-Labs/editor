@@ -18,6 +18,7 @@ const createNodeSystemContext = () => {
     nodeSystem: NodeSystem;
     entries: string[];
     addNode: (baseId: string, node: NodeModel) => void;
+    updateNode: (nodeId: string, updatedNode: NodeModel) => void;
     removeNode: (nodeId: string) => void;
     isEntry: (nodeId: string) => boolean;
     createEntry: (entryName: string) => void;
@@ -93,6 +94,28 @@ const createNodeSystemContext = () => {
       });
     }, [setUnsavedChanges]);
 
+    const updateNode = useCallback((
+      nodeId: string,
+      updatedNode: NodeModel,
+    ) => {
+      setNodeSystem(prev => {
+        if (!prev[nodeId]) return prev;
+
+        const baseId = prev[nodeId].baseId!;
+        const index = prev[baseId].nodes.findIndex(n => n.id === nodeId);
+        
+        if (index !== -1) {
+          prev[baseId].nodes[index] = {
+            ...prev[baseId].nodes[index],
+            ...updatedNode,
+          };
+        }
+
+        setUnsavedChanges(true);
+        return { ...prev };
+      });
+    }, [setUnsavedChanges]);
+
     const removeNode = useCallback((nodeId: string) => {
       setNodeSystem(prev => {
         const baseId: string = prev[nodeId].baseId!;
@@ -120,6 +143,7 @@ const createNodeSystemContext = () => {
       nodeSystem,
       entries,
       addNode,
+      updateNode,
       removeNode,
       isEntry,
       createEntry,

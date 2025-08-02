@@ -117,12 +117,12 @@
   pointer-events: auto;
 }
 
-.node-context.left {
+.node-context.side {
   left: calc(100% + 2rem);
   top: 50%;
 }
 
-.node.active + .node-context.left {
+.node.active + .node-context.side {
   transform: translateX(0%) translateY(-50%) scale(1);
 }
 

@@ -5,7 +5,7 @@ import {
 
 import type { NodeModel } from "@defs/Node";
 
-import { useUnsavedChangesContext } from "@contexts/unsavedChanges";
+import { useNodeSystemContext } from "@contexts/nodeSystem";
 
 import { DynamicIcon } from "@components/commons/DynamicIcon";
 import { Glass } from "@components/commons/Glass";
@@ -24,9 +24,7 @@ export function Node({
   showCanvas?: boolean;
   forcedActive?: boolean;
 }) {
-  const {
-    setUnsavedChanges,
-  } = useUnsavedChangesContext()!;
+  const { updateNode } = useNodeSystemContext()!;
 
   const [active, setActive] = useState(false);
   const [baseType, setBaseType] = useState<string>(node.baseType || "text");
@@ -39,8 +37,13 @@ export function Node({
   const switchBaseType = useCallback((type: string) => {
     node.baseType = type;
     setBaseType(type);
-    setUnsavedChanges(true);
-  }, [setUnsavedChanges, node]);
+    updateNode(node.id!, node);
+  }, [updateNode, node]);
+
+  const changeValue = useCallback((value: string) => {
+    node.value = value;
+    updateNode(node.id!, node);
+  }, [updateNode, node]);
 
   return (<>
     <div className="node-wrapper">
@@ -73,7 +76,7 @@ export function Node({
         <Glass
           className={[
             "node-context",
-            node.context.length > 20 ? "left" : "",
+            node.context.length > 20 ? "side" : "",
           ].join(" ")}
         >
           {
@@ -129,10 +132,7 @@ export function Node({
               <Input
                 placeholder="Base Node Value"
                 defaultValue={node.value || ""}
-                onChange={(event) => {
-                  node.value = event.target.value;
-                  setUnsavedChanges(true);
-                }}
+                onChange={(e) => changeValue(e.target.value)}
               />
             </div>
           </>)}
