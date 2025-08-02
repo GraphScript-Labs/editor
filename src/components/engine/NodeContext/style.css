@@ -1,0 +1,35 @@
+.node-context {
+  position: absolute;
+  top: calc(100% + 1.5rem);
+  left: 50%;
+  padding: 1rem;
+  cursor: default;
+  display: grid;
+  grid-template-columns: repeat(5, 3.5rem);
+  gap: 0.5rem;
+  transform: translateX(-50%) translateY(-50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.node.active + .node-context {
+  transform: translateX(-50%) translateY(0%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.node-context.side {
+  left: calc(100% + 2rem);
+  top: 50%;
+}
+
+.node.active + .node-context.side {
+  transform: translateX(0%) translateY(-50%) scale(1);
+}
+
+.context-canvas {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+}
+
