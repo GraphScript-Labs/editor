@@ -25,7 +25,7 @@ export function Canvas({
             node={{
               ...node,
               hasNext: false,
-              context: node.isBase ? node.context : [
+              context: !node.isBase ? node.context : [
                 {
                   id: `${node.id}:REMOVE`,
                   name: "Remove",
