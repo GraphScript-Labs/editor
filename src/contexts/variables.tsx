@@ -29,9 +29,7 @@ const createVariablesContext = () => {
   const VariablesProvider = ({ children }: {
     children: ReactNode;
   }) => {
-    const {
-      requestPrompt,
-    } = usePromptContext()!;
+    const { requestPrompt } = usePromptContext()!;
 
     const [stSet, setStSet] = useState<Set<string>>(new Set());
     const [ccSet, setCcSet] = useState<Set<string>>(new Set());

@@ -10,17 +10,8 @@ import "./style.css";
 export function Canvas({
   baseId,
 }: CanvasModel) {
-  const {
-    nodeSystem,
-  } = useNodeSystemContext()!;
-
-  const {
-    newNode,
-  } = useNodeFactoryContext()!;
-
-  const {
-    removeNode,
-  } = useNodeSystemContext()!;
+  const { newNode } = useNodeFactoryContext()!;
+  const { nodeSystem, removeNode } = useNodeSystemContext()!;
   
   const nodes = nodeSystem[baseId]?.nodes || [];
 

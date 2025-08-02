@@ -31,9 +31,7 @@ const createNodeSystemContext = () => {
   const NodeSystemProvider = ({ children }: {
     children: ReactNode;
   }) => {
-    const {
-      setUnsavedChanges,
-    } = useUnsavedChangesContext()!;
+    const { setUnsavedChanges } = useUnsavedChangesContext()!;
 
     const [entries, setEntries] = useState<string[]>([
       "ENTRY",
