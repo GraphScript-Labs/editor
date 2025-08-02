@@ -39,10 +39,7 @@ export function NodeContext({
       {
         (!isBase && showCanvas) && (<>
           <Glass className="context-canvas">
-            <Canvas
-              baseId={nodeId}
-              contextCanvas={true}
-            />
+            <Canvas baseId={nodeId} />
           </Glass>
         </>)
       }

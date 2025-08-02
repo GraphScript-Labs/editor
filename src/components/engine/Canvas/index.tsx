@@ -9,7 +9,6 @@ import "./style.css";
 
 export function Canvas({
   baseId,
-  contextCanvas = false,
 }: CanvasModel) {
   const {
     nodeSystem,
@@ -22,8 +21,8 @@ export function Canvas({
   const {
     removeNode,
   } = useNodeSystemContext()!;
-
-  const nodes = nodeSystem[baseId]?.nodes || [];;
+  
+  const nodes = nodeSystem[baseId]?.nodes || [];
 
   return (<>
     <div className="canvas">
@@ -31,11 +30,11 @@ export function Canvas({
         {
           nodes.map(node => <Node
             key={node.id}
-            showCanvas={!contextCanvas}
+            showCanvas={true}
             node={{
               ...node,
-              hasNext: !contextCanvas,
-              context: !contextCanvas || node.isBase ? node.context : [
+              hasNext: false,
+              context: node.isBase ? node.context : [
                 {
                   id: `${node.id}:REMOVE`,
                   name: "Remove",

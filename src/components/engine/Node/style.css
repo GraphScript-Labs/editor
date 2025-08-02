@@ -90,6 +90,10 @@
   height: 100%;
 }
 
+.canvas .canvas .node-pointer {
+  display: none;
+}
+
 .node-wrapper {
   position: relative;
   width: var(--size);
