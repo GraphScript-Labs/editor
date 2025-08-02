@@ -26,10 +26,12 @@ const createNodeHistoryContext = () => {
       nodeId: string,
       topLevel: boolean = false,
     ) => {
-      nodeHistory.current.push(activeNode);
-      if (topLevel) nodeHistory.current = [];
-      setActiveNode(nodeId);
-    }, [activeNode]);
+      setActiveNode(active => {
+        nodeHistory.current.push(active);
+        if (topLevel) nodeHistory.current = [];
+        return nodeId;
+      });
+    }, []);
 
     const closeNode = useCallback(() => {
       setActiveNode(nodeHistory.current.pop()!);
