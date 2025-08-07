@@ -11,6 +11,7 @@ export interface NodeModel {
   baseType?: string;
   isBase?: boolean;
   isTopLevel?: boolean;
+  isDecorative?: boolean;
 }
 
 export type NodeGroup = {

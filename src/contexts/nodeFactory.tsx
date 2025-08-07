@@ -80,6 +80,7 @@ const createNodeFactoryContext = () => {
       color: "black",
       context: [
         nodeTemplate(baseId, {
+          id: `ANN:BASE:${baseId}`,
           name: "Base Node",
           code: "base",
           icon: "Atom",
@@ -91,10 +92,30 @@ const createNodeFactoryContext = () => {
           name: "Components",
           icon: "Shapes",
           color: "black",
-          context: componentLib.map(component => nodeTemplate(
-            baseId,
-            component,
-          )),
+          context: componentLib.sort(
+            (
+              a: { order?: number },
+              b: { order?: number },
+            ) => a.order! - b.order!
+          ).reduce((
+            acc: NodeModel[],
+            curr: {
+              name: string;
+              icon: string;
+              color: string;
+              nodes: NodeModel[];
+            }
+          ) => [
+            ...acc,
+            {
+              id: `ANN:CMP:SECTION:${curr.name}`,
+              name: curr.name,
+              color: curr.color,
+              icon: curr.icon,
+              isDecorative: true,
+            },
+            ...curr.nodes.map(node => nodeTemplate(baseId, node)),
+          ], [])
         },
         {
           id: "ANN:CCMP",
@@ -103,6 +124,7 @@ const createNodeFactoryContext = () => {
           color: "black",
           context: [
             {
+              id: "ANN:CCMP:ADD",
               name: "Add Custom Component",
               icon: "Plus",
               color: "black",
@@ -111,6 +133,7 @@ const createNodeFactoryContext = () => {
             ...customComponents.map(component => nodeTemplate(
               baseId,
               {
+                id: `ANN:CCMP:${component.name}`,
                 name: component.name,
                 code: component.name,
                 icon: "Component",
@@ -126,6 +149,7 @@ const createNodeFactoryContext = () => {
           color: "black",
           context: [
             {
+              id: "ANN:STATES:ADD",
               name: "Add State",
               icon: "Plus",
               color: "black",
@@ -134,6 +158,7 @@ const createNodeFactoryContext = () => {
             ...statesList.map(state => nodeTemplate(
               baseId,
               {
+                id: `ANN:STATES:${state.name}`,
                 name: state.name,
                 code: state.name,
                 icon: "Puzzle",

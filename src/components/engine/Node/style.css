@@ -70,6 +70,7 @@
 .node:hover > .node-name {
   opacity: 1;
   translate: 0;
+  z-index: 10;
 }
 
 .node-pointer {

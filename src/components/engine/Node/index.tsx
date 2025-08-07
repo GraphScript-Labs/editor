@@ -9,6 +9,7 @@ import { DynamicIcon } from "@components/commons/DynamicIcon";
 import { Glass } from "@components/commons/Glass";
 
 import { NodeContext } from "@components/engine/NodeContext";
+import { DecorativeNode } from "@components/engine/DecorativeNode";
 
 import "./style.css";
 
@@ -27,6 +28,8 @@ export function Node({
     if (node.action) node.action();
     else setActive(prev => !prev);
   }, [node]);
+
+  if (node.isDecorative) return <DecorativeNode node={node} />;
 
   return (<>
     <div className="node-wrapper">

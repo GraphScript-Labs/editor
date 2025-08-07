@@ -31,7 +31,7 @@ export function NodeContext({
     >
       {
         context?.map((contextNode => <Node
-          key={contextNode.name}
+          key={contextNode.id}
           node={contextNode}
         />))
       }

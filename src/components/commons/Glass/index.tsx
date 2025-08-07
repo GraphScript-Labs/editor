@@ -15,7 +15,6 @@ export function Glass({
       className={`glass-card ${className}`}
       {...props}
     >
-      <div className="glass-card-background" />
       {children}
     </div>
   </>);
