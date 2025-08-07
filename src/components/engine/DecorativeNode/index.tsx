@@ -1,5 +1,7 @@
 import type { NodeModel } from "@defs/Node"
 
+import { DynamicIcon } from "@components/commons/DynamicIcon";
+
 import "./style.css";
 
 export function DecorativeNode({
@@ -8,7 +10,8 @@ export function DecorativeNode({
   node: NodeModel;
 }) {
   return (<>
-    <div className="decorative-node">
+    <div className="decorative-node" style={{ color: node.color }}>
+      <DynamicIcon className="decorative-node-icon" icon={node.icon} />
       <span className="decorative-node-name">{node.name}</span>
     </div>
   </>);
