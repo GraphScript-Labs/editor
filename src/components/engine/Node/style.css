@@ -1,7 +1,13 @@
-.node {
+.node-wrapper {
   --size: 3rem;
   --icon-size: 1.5rem;
 
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+}  
+
+.node {
   width: var(--size);
   height: var(--size);
   display: flex;
@@ -93,11 +99,5 @@
 
 .canvas .canvas .node-pointer {
   display: none;
-}
-
-.node-wrapper {
-  position: relative;
-  width: var(--size);
-  height: var(--size);
 }
 

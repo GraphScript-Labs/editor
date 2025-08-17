@@ -5,6 +5,7 @@ import { Glass } from "@components/commons/Glass";
 import { Canvas } from "@components/engine/Canvas";
 import { Node } from "@components/engine/Node";
 import { Variants } from "@components/engine/Variants";
+import { FillerNode } from "@components/engine/FillerNode";
 
 import "./style.css";
 
@@ -38,6 +39,7 @@ export function NodeContext({
 
       {
         (!isBase && showCanvas) && (<>
+          <span className="context-break" />
           <Glass className="context-canvas">
             <Canvas baseId={nodeId} />
           </Glass>
@@ -45,6 +47,13 @@ export function NodeContext({
       }
 
       <Variants node={node} />
+      <div className="context-length">
+        <FillerNode />
+        <FillerNode />
+        <FillerNode />
+        <FillerNode />
+        <FillerNode />
+      </div>
     </Glass>
   </>);
 }
