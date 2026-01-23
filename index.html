@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>GraphScript Engine</title>
+    <link rel="icon" type="image/svg+xml" href="./GraphScript.png" />
+
+    <meta name="title" content="GraphScript Editor">
+    <meta name="description" content="GraphScript is a general-purpose visual scripting editor that lets you build logic by connecting visual nodes. No code, just flow.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://graphscript-labs.github.io/editor/">
+    <meta property="og:title" content="GraphScript Editor">
+    <meta property="og:description" content="GraphScript is a general-purpose visual scripting editor that lets you build logic by connecting visual nodes. No code, just flow.">
+    <meta property="og:image" content="https://github.com/GraphScript-Labs/.github/blob/main/Banner.png?raw=true">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://graphscript-labs.github.io/editor/">
+    <meta name="twitter:title" content="GraphScript Editor">
+    <meta name="twitter:description" content="GraphScript is a general-purpose visual scripting editor that lets you build logic by connecting visual nodes. No code, just flow.">
+    <meta name="twitter:image" content="https://github.com/GraphScript-Labs/.github/blob/main/Banner.png?raw=true">
+
+    <script src="./pwv.js"></script>
+    
+    <script>
+      if (!window.hasPWV) {
+        document.addEventListener("contextmenu", (event) => {
+          event.preventDefault();
+        });
+      }
+    </script>
+
+    <style>
+      .pywebview-drag-region {
+        position: fixed;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        opacity: 0%;
+        z-index: 0;
+        pointer-events: all;
+      }
+    </style>
+    <script type="module" crossorigin src="./assets/index-C6ZvB7hl.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-R6XHfzOt.css">
+  </head>
+  <body>
+    <span class="pywebview-drag-region"></span>
+    <div id="root"></div>
+    <script>
+      if (!window.hasPWV) {
+        const element = document.querySelector(".pywebview-drag-region");
+        element.remove();
+      }
+    </script>
+  </body>
+</html>
